@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteka.gui.controller.MainViewController">
+   <top>
+      <BorderPane fx:id="topBar" BorderPane.alignment="CENTER">
+         <left>
+            <MenuBar>
+               <menus>
+                  <Menu text="File">
+                     <MenuItem onAction="#onLoadStatePressed" text="Load State" />
+                     <MenuItem onAction="#onSaveStatePressed" text="Save State" />
+                     <SeparatorMenuItem />
+                     <MenuItem onAction="#onExitPressed" text="Exit" />
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </left>
+         <center>
+            <Label fx:id="userInfoLabel" text="User: Not logged in" BorderPane.alignment="CENTER_LEFT">
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font size="14.0"/>
+               </font>
+            </Label>
+         </center>
+         <right>
+            <Button fx:id="logoutButton" onAction="#onLogoutPressed" text="Log Out" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <BorderPane.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER"> <!-- spacing on VBox, children listed directly -->
+         <Label fx:id="welcomeLabel" text="Welcome!">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </Label>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BIBLIOTEKA">
+            <font>
+               <Font name="Noto Serif Myanmar Thin" size="48.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="10.0" bottom="30.0"/>
+            </VBox.margin>
+         </Text>
+         <HBox alignment="CENTER" spacing="20.0"> <!-- spacing on HBox, children listed directly -->
+            <Button fx:id="allBooksButton" mnemonicParsing="false" onAction="#onAllBooksButtonPressed" prefHeight="120.0" prefWidth="180.0" text="All Books" style="-fx-font-size: 16px;">
+               <!-- <HBox.margin><Insets /></HBox.margin> --> <!-- Optional individual margin -->
+            </Button>
+            <Button fx:id="myBorrowedButton" mnemonicParsing="false" onAction="#onMyBorrowedButtonPressed" prefHeight="120.0" prefWidth="180.0" text="My Borrowed Books" style="-fx-font-size: 16px;" />
+            <Button fx:id="borrowedButton" mnemonicParsing="false" onAction="#onBorrowedButtonPressed" prefHeight="120.0" prefWidth="180.0" text="All Borrowed" style="-fx-font-size: 16px;" />
+         </HBox>
+         <BorderPane.margin> <!-- This margin is for the VBox itself within the BorderPane's center -->
+            <Insets top="20.0" bottom="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

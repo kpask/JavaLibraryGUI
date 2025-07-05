@@ -1,0 +1,6 @@
+module:biblioteka
+biblioteka.core
+biblioteka.factory
+biblioteka.gui
+biblioteka.gui.controller
+biblioteka.testing
