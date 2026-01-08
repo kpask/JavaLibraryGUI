@@ -5,11 +5,13 @@
 ## Turinys
 1.  [Paskirtis](#1-paskirtis)
 2.  [Technologijos](#2-technologijos)
-3.  [Funkcionalumas](#4-funkcionalumas)
-4.  [Pagrindinės klasės ir struktūra](#5-pagrindinės-klasės-ir-struktūra)
-5.  [Panaudoti projektavimo šablonai](#7-panaudoti-projektavimo-šablonai)
-6.  [Plėtimo galimybės](#8-plėtimo-galimybės)
-7. [Klasių diagramos paveikslėlis](#11-klasių-diagramos-paveikslėlis)
+3.  [Diegimas ir paleidimas](#3-diegimas-ir-paleidimas)
+4.  [Funkcionalumas](#4-funkcionalumas)
+5.  [Grafinė vartotojo sąsaja](#5-grafinė-vartotojo-sąsaja)
+6.  [Pagrindinės klasės ir struktūra](#6-pagrindinės-klasės-ir-struktūra)
+7.  [Panaudoti projektavimo šablonai](#7-panaudoti-projektavimo-šablonai)
+8.  [Plėtimo galimybės](#8-plėtimo-galimybės)
+9. [Klasių diagramos paveikslėlis](#9-klasių-diagramos-paveikslėlis)
 
 ---
 
@@ -29,7 +31,44 @@ Projektas "Biblioteka" yra programinė įranga, skirta mažos bibliotekos leidin
 
 ---
 
-## 3. Funkcionalumas
+## 3. Diegimas ir paleidimas
+
+### Reikalavimai
+- Java 21 ar naujesnė versija
+- Maven 3.6+ (arba naudokite projekte esančius `mvnw` / `mvnw.cmd`)
+
+### Paleidimas
+
+**Naudojant Maven Wrapper:**
+```bash
+# Windows
+mvnw.cmd clean javafx:run
+
+# Linux/Mac
+./mvnw clean javafx:run
+```
+
+**Naudojant sistemos Maven:**
+```bash
+mvn clean javafx:run
+```
+
+### Numatytoji paskyra
+Pirmą kartą paleidus programą, automatiškai sukuriama administratoriaus paskyra:
+- **Vartotojo vardas:** `admin`
+- **Slaptažodis:** `admin`
+
+**⚠️ SVARBU:** Pakeiskite numatytojo administratoriaus slaptažodį produkcinėje aplinkoje!
+
+### Javadoc generavimas
+```bash
+mvn javadoc:javadoc
+```
+Generuota dokumentacija bus prieinama `target/site/apidocs/` kataloge.
+
+---
+
+## 4. Funkcionalumas
 
 **Vartotojų valdymas:**
 *   Prisijungimas ir registracija.
@@ -60,7 +99,73 @@ Projektas "Biblioteka" yra programinė įranga, skirta mažos bibliotekos leidin
 
 ---
 
-## 4. Pagrindinės klasės ir struktūra
+## 5. Grafinė vartotojo sąsaja
+
+Programa turi šiuos pagrindinius langus:
+
+### 1. Prisijungimo langas (Login View)
+- Vartotojo vardo ir slaptažodžio įvedimas
+- Prisijungimo ir registracijos mygtukai
+- Klaidos pranešimų rodymas
+
+![Prisijungimo langas](images/login.png)
+
+### 2. Pagrindinis langas (Main View / Dashboard)
+- Sveikinimo pranešimas su vartotojo informacija
+- Trijų pagrindinių funkcijų mygtukai:
+  - **"All Books"** - Visų knygų sąrašas
+  - **"My Borrowed Books"** - Mano pasiskolintos knygos
+  - **"All Borrowed"** - Visų pasiskolintų knygų sąrašas
+- Meniu juosta su File meniu (Load State, Save State, Exit)
+- Atsijungimo mygtukas
+
+![Pagrindinis langas](images/main.png)
+
+### 3. Visų knygų langas (All Books View)
+- Visų bibliotekoje esančių knygų sąrašas (lentelė)
+- Knygų informacija: pavadinimas, autorius, ISBN, žanras, metai, puslapių skaičius
+- Administratoriui: knygų pašalinimo mygtukas
+- Skaitytojui: knygų skolinimo mygtukas
+
+**Administratoriaus vaizdas:**
+![Administratoriaus knygų meniu](images/adminbookmenu.png)
+
+**Skaitytojo vaizdas:**
+![Skaitytojo knygų meniu](images/userbookmenu.png)
+
+**Skolinimo langas:**
+![Skolinimo langas](images/borrowpopup.png)
+
+### 4. Knygos pridėjimo langas (Add Book View)
+- Forma naujai knygai pridėti (tik administratoriui)
+- Laukai: pavadinimas, autorius, ISBN, žanras, metai, puslapių skaičius
+- Validacijos pranešimai
+- Išsaugojimo ir atšaukimo mygtukai
+
+![Knygos pridėjimo langas](images/addingbook.png)
+
+**Validacijos klaidos pranešimas:**
+![Neteisingas ISBN](images/wrongisbn.png)
+
+### 5. Visų pasiskolintų knygų langas (All Borrowed View)
+- Visų pasiskolintų knygų sąrašas
+- Informacija: knyga, skolininkas, skolinimo data
+- Priversto grąžinimo mygtukas
+
+![Administratoriaus visų pasiskolintų knygų langas](images/adminallborrowed.png)
+
+![Administratoriaus pasiskolintų knygų langas](images/userallborrowed.png)
+
+### 6. Mano pasiskolintų knygų langas (My Borrowed Books View)
+- Vartotojo pasiskolintų knygų sąrašas
+- Informacija: knyga, skolinimo data
+- Grąžinimo mygtukas
+
+![Skaitytojo pasiskolintų knygų langas](images/adminborrowed.png)
+
+---
+
+## 6. Pagrindinės klasės ir struktūra
 
 **Paketai:**
 *   **`biblioteka.core`**: Pagrindinės duomenų modelio klasės, sąsajos ir išimtys.
@@ -78,7 +183,7 @@ Projektas "Biblioteka" yra programinė įranga, skirta mažos bibliotekos leidin
 
 ---
 
-## 5. Panaudoti projektavimo šablonai
+## 7. Panaudoti projektavimo šablonai
 
 *   **Factory Method:** Įgyvendinta per `biblioteka.factory` paketą (`LeidinysFactory`, `KnygaCreator`, `ZurnalasCreator`) leidinių objektų kūrimui.
 *   **MVC (Model-View-Controller) / MVVM (Model-View-ViewModel):** Bendra GUI architektūra.
@@ -88,7 +193,7 @@ Projektas "Biblioteka" yra programinė įranga, skirta mažos bibliotekos leidin
 
 ---
 
-## 6. Plėtimo galimybės
+## 8. Plėtimo galimybės
 
 *   Pilnai integruoti `Zurnalas` ir `ElektronineKnyga` pridėjimą ir valdymą per GUI.
 *   Įdiegti paieškos ir filtravimo funkcionalumą leidiniams.
@@ -100,7 +205,7 @@ Projektas "Biblioteka" yra programinė įranga, skirta mažos bibliotekos leidin
 ---
 
 
-## 7. Klasių diagrama
+## 9. Klasių diagrama
 
 ![Klasių diagrama](https://i.imgur.com/JykTNey.png)
 

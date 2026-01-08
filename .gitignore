@@ -7,3 +7,8 @@ out/
 
 .DS_Store
 
+# Generated javadoc
+javadoc/
+javafolde/
+*.dat
+
